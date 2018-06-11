@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Anketa</title>
+</head>
+<body>
+    <form id='form' name="abc" method="GET" action="anketa.php">
+        <div class="header">Oblubeny programovaci jazyk?</div>
+        <div><input type="radio" name="anketa" value='javascript' id="js"><span>JavaScript</span></div>
+        <div><input type="radio" name="anketa" value='java' id="java"><span>Java</span></div>
+        <div><input type="radio" name="anketa" value='c' id="c"><span>C</span></div>
+        <div><input type="radio" name="anketa" value='mysql' id="mysql"><span>MySQL</span></div>
+        <div><input type="radio" name="anketa" value='HTML' id="HTML"><span>HTML</span></div>
+        <div><input type="checkbox" name="checkbox" id="messageCheckbox"><span>Suhlasim so spracovanim osobnych udajov.</span></div>
+        <input type="submit" name='buttonSend' value='Send' id="send" disabled>
+
+    </form>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script >
+
+        function getCookie(key) {
+            var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+            return keyValue ? keyValue[2] : null;
+        }
+
+        var radio = false,
+            check = '',
+            isClicked = getCookie('clickedPHP');
+
+        $('input:radio[name="anketa"]').change(function(){
+            radio = true;
+        });
+
+        $('input:checkbox[name="checkbox"]').change(function(){
+            check = $('#messageCheckbox:checked').val();
+        });
+
+        $("#form").change(function(){
+            if(radio === true && check === 'on' && isClicked == null){
+                $('#send').prop('disabled',false);
+            }
+            else {
+                $('#send').prop('disabled',true);
+            }
+        });
+
+    </script>
+</body>
+</html>
